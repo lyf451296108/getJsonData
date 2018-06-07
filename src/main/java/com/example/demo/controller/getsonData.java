@@ -13,11 +13,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo.mapper.AcountinfomationMapper;
 import com.example.demo.pojo.Acountinfomation;
+import com.example.demo.utils.AESUtil;
+import com.example.demo.utils.MD5Utils;
 
 @Controller
 @ResponseBody
@@ -84,15 +87,28 @@ public class getsonData {
 	@PostMapping(value = "/getJsonBody")
 	@ResponseBody
 	public String getJsonBody(HttpServletRequest request,
-	        HttpServletResponse response, @RequestBody String jsonData) {
+	        HttpServletResponse response, @RequestBody String jsonData,@RequestParam("sign")String sign,
+	        @RequestParam("number")String number, @RequestParam(value = "recordType", required = false)String recordType) {
 	    try {
-    	    List<Acountinfomation> list = new ArrayList<Acountinfomation>();  
-            list = JSONObject.parseArray(jsonData.toString(), Acountinfomation.class);
-    	    for(Acountinfomation tst:list) {
-    	    	 System.out.println(tst.toString());
-    	    	 //mapper.insert(tst);
-    	    }
-    	    mapper.insertOrUpdateAccountInforList(list);
+	    	
+	    	String pass = "ABCDEFG"+number;
+	    	
+	    	boolean vaild = MD5Utils.isEqualsToMd5(pass, sign);
+	    	
+	    	if(vaild) {
+	    		String moelList = AESUtil.decrypt(jsonData, "123456");
+		    	
+	    	    List<Acountinfomation> list = new ArrayList<Acountinfomation>();  
+	            list = JSONObject.parseArray(moelList.toString(), Acountinfomation.class);
+	    	    for(Acountinfomation tst:list) {
+	    	    	 System.out.println(tst.toString());
+	    	    	 //mapper.insert(tst);
+	    	    }
+	    	    mapper.insertOrUpdateAccountInforList(list);
+	    	    
+	    	    return "Data get Success!";
+	    	}
+	    	return "access denied";
 	    } catch (Exception e) {
 	        System.out.println(e.toString());
 	    }

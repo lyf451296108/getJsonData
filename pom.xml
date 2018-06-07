@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.demo</groupId>
-	<artifactId>getJsonData</artifactId>
+	<artifactId>getData</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>getJsonData</name>
-	<description>DgetJsonData</description>
+	<name>getData</name>
+	<description>DgetData</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
