@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.LogdataMapper">
+  <resultMap id="BaseResultMap" type="com.example.demo.pojo.Logdata">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="batch_id" jdbcType="VARCHAR" property="batchId" />
+    <result column="org_id" jdbcType="VARCHAR" property="orgId" />
+    <result column="user_acc" jdbcType="VARCHAR" property="userAcc" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="owner_acc" jdbcType="VARCHAR" property="ownerAcc" />
+    <result column="module_id" jdbcType="VARCHAR" property="moduleId" />
+    <result column="module_name" jdbcType="VARCHAR" property="moduleName" />
+    <result column="operate_id" jdbcType="VARCHAR" property="operateId" />
+    <result column="operate_name" jdbcType="VARCHAR" property="operateName" />
+    <result column="res_operate_id" jdbcType="VARCHAR" property="resOperateId" />
+    <result column="res_operate_name" jdbcType="VARCHAR" property="resOperateName" />
+    <result column="operate_num" jdbcType="INTEGER" property="operateNum" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="resouce_id" jdbcType="VARCHAR" property="resouceId" />
+    <result column="operate_des" jdbcType="VARCHAR" property="operateDes" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.example.demo.pojo.Logdata">
+    <result column="data" jdbcType="LONGVARCHAR" property="data" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, batch_id, org_id, user_acc, user_name, owner_acc, module_id, module_name, operate_id, 
+    operate_name, res_operate_id, res_operate_name, operate_num, content, resouce_id, 
+    operate_des
+  </sql>
+  <sql id="Blob_Column_List">
+    data
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.example.demo.pojo.LogdataExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from logdata
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.example.demo.pojo.LogdataExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from logdata
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from logdata
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from logdata
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.demo.pojo.LogdataExample">
+    delete from logdata
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.pojo.Logdata">
+    insert into logdata (id, batch_id, org_id, 
+      user_acc, user_name, owner_acc, 
+      module_id, module_name, operate_id, 
+      operate_name, res_operate_id, res_operate_name, 
+      operate_num, content, resouce_id, 
+      operate_des, data)
+    values (#{id,jdbcType=INTEGER}, #{batchId,jdbcType=VARCHAR}, #{orgId,jdbcType=VARCHAR}, 
+      #{userAcc,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{ownerAcc,jdbcType=VARCHAR}, 
+      #{moduleId,jdbcType=VARCHAR}, #{moduleName,jdbcType=VARCHAR}, #{operateId,jdbcType=VARCHAR}, 
+      #{operateName,jdbcType=VARCHAR}, #{resOperateId,jdbcType=VARCHAR}, #{resOperateName,jdbcType=VARCHAR}, 
+      #{operateNum,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{resouceId,jdbcType=VARCHAR}, 
+      #{operateDes,jdbcType=VARCHAR}, #{data,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.pojo.Logdata">
+    insert into logdata
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="batchId != null">
+        batch_id,
+      </if>
+      <if test="orgId != null">
+        org_id,
+      </if>
+      <if test="userAcc != null">
+        user_acc,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="ownerAcc != null">
+        owner_acc,
+      </if>
+      <if test="moduleId != null">
+        module_id,
+      </if>
+      <if test="moduleName != null">
+        module_name,
+      </if>
+      <if test="operateId != null">
+        operate_id,
+      </if>
+      <if test="operateName != null">
+        operate_name,
+      </if>
+      <if test="resOperateId != null">
+        res_operate_id,
+      </if>
+      <if test="resOperateName != null">
+        res_operate_name,
+      </if>
+      <if test="operateNum != null">
+        operate_num,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="resouceId != null">
+        resouce_id,
+      </if>
+      <if test="operateDes != null">
+        operate_des,
+      </if>
+      <if test="data != null">
+        data,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="batchId != null">
+        #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null">
+        #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="userAcc != null">
+        #{userAcc,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerAcc != null">
+        #{ownerAcc,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleId != null">
+        #{moduleId,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleName != null">
+        #{moduleName,jdbcType=VARCHAR},
+      </if>
+      <if test="operateId != null">
+        #{operateId,jdbcType=VARCHAR},
+      </if>
+      <if test="operateName != null">
+        #{operateName,jdbcType=VARCHAR},
+      </if>
+      <if test="resOperateId != null">
+        #{resOperateId,jdbcType=VARCHAR},
+      </if>
+      <if test="resOperateName != null">
+        #{resOperateName,jdbcType=VARCHAR},
+      </if>
+      <if test="operateNum != null">
+        #{operateNum,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="resouceId != null">
+        #{resouceId,jdbcType=VARCHAR},
+      </if>
+      <if test="operateDes != null">
+        #{operateDes,jdbcType=VARCHAR},
+      </if>
+      <if test="data != null">
+        #{data,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.demo.pojo.LogdataExample" resultType="java.lang.Integer">
+    select count(*) from logdata
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update logdata
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.batchId != null">
+        batch_id = #{record.batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgId != null">
+        org_id = #{record.orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userAcc != null">
+        user_acc = #{record.userAcc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null">
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ownerAcc != null">
+        owner_acc = #{record.ownerAcc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleId != null">
+        module_id = #{record.moduleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleName != null">
+        module_name = #{record.moduleName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operateId != null">
+        operate_id = #{record.operateId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operateName != null">
+        operate_name = #{record.operateName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resOperateId != null">
+        res_operate_id = #{record.resOperateId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resOperateName != null">
+        res_operate_name = #{record.resOperateName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operateNum != null">
+        operate_num = #{record.operateNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resouceId != null">
+        resouce_id = #{record.resouceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operateDes != null">
+        operate_des = #{record.operateDes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.data != null">
+        data = #{record.data,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update logdata
+    set id = #{record.id,jdbcType=INTEGER},
+      batch_id = #{record.batchId,jdbcType=VARCHAR},
+      org_id = #{record.orgId,jdbcType=VARCHAR},
+      user_acc = #{record.userAcc,jdbcType=VARCHAR},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      owner_acc = #{record.ownerAcc,jdbcType=VARCHAR},
+      module_id = #{record.moduleId,jdbcType=VARCHAR},
+      module_name = #{record.moduleName,jdbcType=VARCHAR},
+      operate_id = #{record.operateId,jdbcType=VARCHAR},
+      operate_name = #{record.operateName,jdbcType=VARCHAR},
+      res_operate_id = #{record.resOperateId,jdbcType=VARCHAR},
+      res_operate_name = #{record.resOperateName,jdbcType=VARCHAR},
+      operate_num = #{record.operateNum,jdbcType=INTEGER},
+      content = #{record.content,jdbcType=VARCHAR},
+      resouce_id = #{record.resouceId,jdbcType=VARCHAR},
+      operate_des = #{record.operateDes,jdbcType=VARCHAR},
+      data = #{record.data,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update logdata
+    set id = #{record.id,jdbcType=INTEGER},
+      batch_id = #{record.batchId,jdbcType=VARCHAR},
+      org_id = #{record.orgId,jdbcType=VARCHAR},
+      user_acc = #{record.userAcc,jdbcType=VARCHAR},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      owner_acc = #{record.ownerAcc,jdbcType=VARCHAR},
+      module_id = #{record.moduleId,jdbcType=VARCHAR},
+      module_name = #{record.moduleName,jdbcType=VARCHAR},
+      operate_id = #{record.operateId,jdbcType=VARCHAR},
+      operate_name = #{record.operateName,jdbcType=VARCHAR},
+      res_operate_id = #{record.resOperateId,jdbcType=VARCHAR},
+      res_operate_name = #{record.resOperateName,jdbcType=VARCHAR},
+      operate_num = #{record.operateNum,jdbcType=INTEGER},
+      content = #{record.content,jdbcType=VARCHAR},
+      resouce_id = #{record.resouceId,jdbcType=VARCHAR},
+      operate_des = #{record.operateDes,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.pojo.Logdata">
+    update logdata
+    <set>
+      <if test="batchId != null">
+        batch_id = #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null">
+        org_id = #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="userAcc != null">
+        user_acc = #{userAcc,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerAcc != null">
+        owner_acc = #{ownerAcc,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleId != null">
+        module_id = #{moduleId,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleName != null">
+        module_name = #{moduleName,jdbcType=VARCHAR},
+      </if>
+      <if test="operateId != null">
+        operate_id = #{operateId,jdbcType=VARCHAR},
+      </if>
+      <if test="operateName != null">
+        operate_name = #{operateName,jdbcType=VARCHAR},
+      </if>
+      <if test="resOperateId != null">
+        res_operate_id = #{resOperateId,jdbcType=VARCHAR},
+      </if>
+      <if test="resOperateName != null">
+        res_operate_name = #{resOperateName,jdbcType=VARCHAR},
+      </if>
+      <if test="operateNum != null">
+        operate_num = #{operateNum,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="resouceId != null">
+        resouce_id = #{resouceId,jdbcType=VARCHAR},
+      </if>
+      <if test="operateDes != null">
+        operate_des = #{operateDes,jdbcType=VARCHAR},
+      </if>
+      <if test="data != null">
+        data = #{data,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.example.demo.pojo.Logdata">
+    update logdata
+    set batch_id = #{batchId,jdbcType=VARCHAR},
+      org_id = #{orgId,jdbcType=VARCHAR},
+      user_acc = #{userAcc,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      owner_acc = #{ownerAcc,jdbcType=VARCHAR},
+      module_id = #{moduleId,jdbcType=VARCHAR},
+      module_name = #{moduleName,jdbcType=VARCHAR},
+      operate_id = #{operateId,jdbcType=VARCHAR},
+      operate_name = #{operateName,jdbcType=VARCHAR},
+      res_operate_id = #{resOperateId,jdbcType=VARCHAR},
+      res_operate_name = #{resOperateName,jdbcType=VARCHAR},
+      operate_num = #{operateNum,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR},
+      resouce_id = #{resouceId,jdbcType=VARCHAR},
+      operate_des = #{operateDes,jdbcType=VARCHAR},
+      data = #{data,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.pojo.Logdata">
+    update logdata
+    set batch_id = #{batchId,jdbcType=VARCHAR},
+      org_id = #{orgId,jdbcType=VARCHAR},
+      user_acc = #{userAcc,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      owner_acc = #{ownerAcc,jdbcType=VARCHAR},
+      module_id = #{moduleId,jdbcType=VARCHAR},
+      module_name = #{moduleName,jdbcType=VARCHAR},
+      operate_id = #{operateId,jdbcType=VARCHAR},
+      operate_name = #{operateName,jdbcType=VARCHAR},
+      res_operate_id = #{resOperateId,jdbcType=VARCHAR},
+      res_operate_name = #{resOperateName,jdbcType=VARCHAR},
+      operate_num = #{operateNum,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR},
+      resouce_id = #{resouceId,jdbcType=VARCHAR},
+      operate_des = #{operateDes,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <insert id="insertList" parameterType="java.util.List">
+    insert into logdata (id, batch_id, org_id, 
+      user_acc, user_name, owner_acc, 
+      module_id, module_name, operate_id, 
+      operate_name, res_operate_id, res_operate_name, 
+      operate_num, content, resouce_id, 
+      operate_des, data)
+      
+      values 
+    <foreach collection ="list" item="logData" separator =",">
+     (#{logData.id,jdbcType=INTEGER}, #{logData.batchId,jdbcType=VARCHAR}, #{logData.orgId,jdbcType=VARCHAR}, 
+      #{logData.userAcc,jdbcType=VARCHAR}, #{logData.userName,jdbcType=VARCHAR}, #{logData.ownerAcc,jdbcType=VARCHAR}, 
+      #{logData.moduleId,jdbcType=VARCHAR}, #{logData.moduleName,jdbcType=VARCHAR}, #{logData.operateId,jdbcType=VARCHAR}, 
+      #{logData.operateName,jdbcType=VARCHAR}, #{logData.resOperateId,jdbcType=VARCHAR}, #{logData.resOperateName,jdbcType=VARCHAR}, 
+      #{logData.operateNum,jdbcType=INTEGER}, #{logData.content,jdbcType=VARCHAR}, #{logData.resouceId,jdbcType=VARCHAR}, 
+      #{logData.operateDes,jdbcType=VARCHAR}, #{logData.data,jdbcType=LONGVARCHAR})
+    </foreach >
+  </insert>
+</mapper>
