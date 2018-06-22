@@ -1,5 +1,7 @@
 package com.example.demo.utils;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -309,23 +311,33 @@ public class FwCodeUtils {
 		
 //		System.out.println(resulte);
 		
-//		String tempR = "SfFY2HFpWMw3ZuIHxUikuNAxoLvK5MtE5RWWZJnC/Rbs9IuK3FcrBoK4U/y49tkJhUxEc9yrW/4gOk2LgqgmWafPoYaZEwEl4DaE1D89lVBYx/jQA030KTYiqgxlMMSDRE6pGoktcbS8W1pyOZwuuAZtnIpLmfXKNyc3fGhjArh78yV9nl2XrXu/hjB41gCGdh7NVPAOe54lOIjot157is7lJ5D+empOnecVziUu/9Um8+zPtkF0hk8IpNhM2RLpViDtDwLxC5ZQTqlz8w4uxMf3M9wAoEtwtU+H+YiOyAiDgX+toLM6ocF6DrqDVKEQb1T0Iin35ObjUYqt+MpnH0c50CtGz9p5oZ6Vi4fvnMin91LpuLABO08IpNhM2RLpVL6VtIDHu2afrpQBB7j/Dc7lJ5D+empOSvwPXfIDdEoRtQV1oj4DmgCjvlT8TrSG41GKrfjKZx+ThM67r0UXa2NMndKJemS+41GKrfjKZx+gmSxyIS7s+Q==";
+		String tempR = "7pzXXmYkCq5ouRYdc/sJEFPl/RCnrJLFe9ByxQINMnvC1G0OeA2fYQIV8AgrHu175ynfM/sj+Cor1186rZUu1Muigh/btzCS3nYlLrAVeIXmNVZHNtjxwon19TGs1SuPKxMD/BWzgwq1b95DhC18VVuZgHkLepMxOQxrYse5OWaRsbUgA/qBT+pMF5SVPMq/2yX16nZU5orkSUjuM1wKri0PB9FMks3AX54fB+mgIPNiMADIM3nS+Xb327FMV5ZM/uzImhtvYIwSCx3CaA7K14NyFFORNKKisAgwNdaGiA8CINPSp/wo8uieSZ9zJlWFUz1Wz9QYuMHgLWiBfX5xMu4dgnPALtBfMSO+lQ2BNES2ZzsjtahgP54C9pcJYofF+90rvdk7f724aSEBdlQsuc+sqK1+p0NDaNabJTCKlMvQMBZl3XzQKY/I51EM9mcYclI8oYz440Rw0bYtdORA7T4KiOQVW+8TOUM5P90KCRd8ZrtXP9XF+wCdCIxsY3a16V2JU0m74wScsrwdIMPHDF2ho29MaQ6ilhJVUEa3sfG7r21AeI4HGIMXWugn9cL90akzmn1EZbm0Ad8EJtyWP7ca38uE58/Z48qgs3FHIoK443qLoQ1JhppDeB6PuEk12JkB8qZuOZGKvlhsZWHbFcSd+h+Ese6OMasNESCyIvI9eOSxG/0qU29WLbJd1NZyahmEZKOBf4+TNi14lwbgrfWPRqiTE38lL/vzteVtOSmJOLTNWBHegm5/r1LgHMm+3tZAhVXfSSYIew0jqCYhf6eO8F2c+Ce/KWq+/ZAhwOVleVhJ5CqJYItI8FBPUkWUjV+HQVyaBffg+kmc6wSw/y0PLcFQZ6klWwybW21eHKi7ndr3lE2d5f/ymPHYmP+YPMwk35ZdsXfA6KTpZD7X1nmqxF3f57p54YdXUyglbSNs4+/ITlIx4z0tJ7yZ+e263MnOCeLZCFXCZ8Uo1r/bBmGNKlzufPZfIinJZUZVRhaCZ5OPwfNCX2IV8M1dd9on8EQftslV6lc=\r\n" + 
+				"";
 		
-//		System.out.println(new String(FwCodeUtils.decrypt("!&-join+".getBytes("UTF-8"),FwCodeUtils.base64Decode(tempR.getBytes())), "UTF-8"));
+		System.out.println(new String(FwCodeUtils.decrypt("!&-join+".getBytes("UTF-8"),FwCodeUtils.base64Decode(tempR.getBytes())), "UTF-8"));
 	
 		//String  code = "{\"custIdContextMap\":{\"c2a20e0ac4374ed3b5ec5233fe44b4b1\":\"\",\"c2a20e0ac4374ed3b5ec5233fe44frty\":\"teset\"},\"logBean\":{\"batchId\":\"595cc38567904565992fe43acea871f9\",\"content\":\"\",\"data\":\"\",\"moduleId\":\"9\",\"moduleName\":\"淘客户\",\"operateId\":\"63\",\"operateName\":\"淘到客户\",\"operateNum\":1,\"orgId\":\"zyb5cs2\",\"ownerAcc\":\"\",\"resOperateId\":\"2002\",\"resOperateName\":\"转为意向\",\"userAcc\":\"zyb5cs2001\",\"userName\":\"zyb5cs2001\"}}";
 		//String  code = "{\"custIdContextMap\":{},\"logBean\":{\"batchId\":\"595cc38567904565992fe43acea871f9\",\"content\":\"\",\"data\":\"\",\"moduleId\":\"9\",\"moduleName\":\"淘客户\",\"operateId\":\"63\",\"operateName\":\"淘到客户\",\"operateNum\":1,\"orgId\":\"zyb5cs2\",\"ownerAcc\":\"\",\"resOperateId\":\"2002\",\"resOperateName\":\"转为意向\",\"userAcc\":\"zyb5cs2001\",\"userName\":\"zyb5cs2001\"}}";
 		
 		//String code = "123456789";
-		String code = "<xml>\r\n" + 
-				"  <body>\r\n" + 
-				"    <record code=\"0f47406706eecb0e71122c8a99272f50\" callType=\"2\" callerNum=\"15587374274\" calledNum=\"13985560141\" startTime=\"2018-06-20 16:12:22\" timeLength=\"32\" recordURL=\"http://record.qftx.net/deprc/down?code=aliyunoss48dacc9&amp;d=180620&amp;id=0f47406706eecb0e71122c8a99272f50&amp;compid=hzyw&amp;calllen=32\" ownerAcc=\"hzyw161\" communicationNO=\"\" followId=\"null\"/>\r\n" + 
-				"    <record code=\"62c3df2b034665a53578e037b763b489\" callType=\"2\" callerNum=\"057157174144\" calledNum=\"13758842224\" startTime=\"2018-06-20 16:13:24\" timeLength=\"8\" recordURL=\"http://record.qftx.net/deprc/down?code=aliyunoss48dacc9&amp;d=180620&amp;id=62c3df2b034665a53578e037b763b489&amp;compid=hzyw&amp;calllen=8\" ownerAcc=\"hzyw169\" communicationNO=\"\" followId=\"null\"/>\r\n" + 
-				"  </body>\r\n" + 
-				"</xml>";
+		String code = "{\"custIdContextMap\":{\"sadadsa\":\"fdsfsdfsdf\",\"cvxv\":\"fdsfsdfsdf\",\"bnbnbvn\":\"fdsfsdfsdf\",\"jihujk\":\"fdsfsdfsdf\",\"xcvxv\":\"fdsfsdfsdf\",\"rtyfhfgh\":\"fdsfsdfsdf\",\"vbnvnb\":\"fdsfsdfsdf\"},\"logBean\":{\"batchId\":\"595cc38567904565992fe43acea871f9\",\"content\":\"\",\"data\":\"\",\"moduleId\":\"9\",\"moduleName\":\"淘客户\",\"operateId\":\"63\",\"operateName\":\"淘到客户\",\"operateNum\":1,\"orgId\":\"zyb5cs2\",\"ownerAcc\":\"\",\"resOperateId\":\"3002\",\"resOperateName\":\"转为意向\",\"userAcc\":\"zyb5cs2001\",\"userName\":\"zyb5cs2001\"}}";
 		//String s = "<accmsg password=\"123456\" />";
 		
-		System.out.println(base64Encode(encrypt("!&-join+",code)));
+		//System.out.println(base64Encode(encrypt("!&-join+",code)));
+		
+		String str = base64Encode(encrypt("!&-join+",code));
+		System.out.print(str);
+		
+		File txt=new File("d:/log.txt");
+		  if(!txt.exists()){
+		   txt.createNewFile();
+		  }
+		  byte bytes[]=new byte[512];
+		   bytes=str.getBytes();   //新加的
+		   int b=str.length();   //改
+		   FileOutputStream fos=new FileOutputStream(txt);
+		  fos.write(bytes,0,b);
+		  fos.close();
 	
 	}  
 }

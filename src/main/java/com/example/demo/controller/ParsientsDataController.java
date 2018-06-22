@@ -91,6 +91,7 @@ public class ParsientsDataController {
 			System.out.println(dataOne.getLogBean().toString());
 			return FwCodeUtils.base64Encode(FwCodeUtils.encrypt("!&-join+","1"));
 		} catch (Exception e) {
+			System.out.println(e);
 			return FwCodeUtils.base64Encode(FwCodeUtils.encrypt("!&-join+","0"));
 		}
 

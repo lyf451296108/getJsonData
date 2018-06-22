@@ -472,7 +472,6 @@
       operate_name, res_operate_id, res_operate_name, 
       operate_num, content, resouce_id, 
       operate_des, data)
-      
       values 
     <foreach collection ="list" item="logData" separator =",">
      (#{logData.id,jdbcType=INTEGER}, #{logData.batchId,jdbcType=VARCHAR}, #{logData.orgId,jdbcType=VARCHAR}, 

@@ -30,7 +30,7 @@ mybatis:
     type-aliases-package: com.example.demo.pojo
 
 mapper:
-    mappers: comexample.demo.mapper
+    mappers: com.example.demo.mapper
     not-empty: false
     identity: MYSQL
 
