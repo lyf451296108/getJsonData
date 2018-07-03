@@ -41,6 +41,14 @@ spring:
             #127.0.0.1:26379,127.0.0.1:26479,127.0.0.1:26579 #哨兵的配置列表
         timeout: 5000 #连接超时时间（毫秒）
         
+    jpa:
+      properties:
+        hibernate:
+          hbm2ddl:
+            auto: update
+          dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+      show-sql: true
+        
 mybatis:
     mapper-locations: classpath:com/example/demo/mapper/*.xml
     type-aliases-package: com.example.demo.pojo
