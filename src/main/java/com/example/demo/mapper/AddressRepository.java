@@ -2,6 +2,8 @@ package com.example.demo.mapper;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -18,4 +20,6 @@ public interface AddressRepository extends JpaRepository<Address,Long> {
 
     @Query(value = "select  t from Address t where t.addressInfo = :addressInfo")
     Address findAddress(@Param("addressInfo") String addressInfo);
+    
+    Page<Address> findAll(Pageable pageable);
 }

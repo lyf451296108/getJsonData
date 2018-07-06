@@ -56,4 +56,10 @@ logging:
       example:
         demo:
             mapper: debug
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count= countSql
+    returnPageInfo: check
     

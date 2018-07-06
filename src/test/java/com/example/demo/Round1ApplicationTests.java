@@ -1,10 +1,16 @@
 package com.example.demo;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.example.demo.mapper.AddressRepository;
@@ -54,6 +60,22 @@ public class Round1ApplicationTests {
 
 //      测试查询记录，看删除是否成功
         Assert.assertEquals(9,addressRepository.findAll().size());
+    }
+    
+    @SuppressWarnings("deprecation")
+	@Test
+    public void findAllAddress() throws Exception {
+
+        int page = 0,size = 5;
+        Sort sort = new Sort(Sort.Direction.DESC,"addressId");
+        Pageable pageable = new PageRequest(page,size,sort);
+        Page<Address> a = addressRepository.findAll(pageable);
+        System.out.println(a.getTotalPages());
+        System.out.println(a.getTotalElements());
+        List<Address> aa = a.getContent();
+        for (Address u : aa){
+            System.out.println(u.toString());
+        }
     }
 
 }
